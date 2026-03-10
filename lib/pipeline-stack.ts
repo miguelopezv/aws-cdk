@@ -1,5 +1,4 @@
-import { Stack, StackProps, RemovalPolicy, CfnOutput } from "aws-cdk-lib";
-import { Bucket, BlockPublicAccess } from "aws-cdk-lib/aws-s3";
+import { Stack, StackProps } from "aws-cdk-lib";
 import {
   CodePipeline,
   CodePipelineSource,
@@ -7,6 +6,7 @@ import {
 } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
 import { CONSTANTS } from "../utils/constants";
+import { WorkshopPipelineStage } from "./pipeline-stage";
 
 export class WorkshopPipelineStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -21,9 +21,7 @@ export class WorkshopPipelineStack extends Stack {
       }),
     });
 
-    // // Añade aquí tus stages de aplicación
-    // pipeline.addStage(new MyApplicationStage(this, 'Prod', {
-    //   env: { account: '123456789012', region: 'us-east-1' }
-    // }));
+    const deploy = new WorkshopPipelineStage(this, "Deploy");
+    const deployStage = pipeline.addStage(deploy);
   }
 }
