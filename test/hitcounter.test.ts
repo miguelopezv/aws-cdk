@@ -46,3 +46,22 @@ test("Lambda Has Environment Variables", () => {
     },
   });
 });
+
+test("DynamoDB Table Created With Encryption", () => {
+  const stack = new Stack();
+
+  new HitCounter(stack, "MyTestConstruct", {
+    downstream: new Function(stack, "TestFunction", {
+      runtime: Runtime.NODEJS_22_X,
+      handler: "hello.handler",
+      code: Code.fromAsset("lambda"),
+    }),
+  });
+
+  const template = Template.fromStack(stack);
+  template.hasResourceProperties("AWS::DynamoDB::Table", {
+    SSESpecification: {
+      SSEEnabled: true,
+    },
+  });
+});
