@@ -15,7 +15,7 @@ exports.handler = async function (event) {
   });
 
   const command = new InvokeCommand({
-    functionName: process.env.DOWNSTREAM_FUNCTION_NAME,
+    FunctionName: process.env.DOWNSTREAM_FUNCTION_NAME,
     Payload: JSON.stringify(event),
   });
 
