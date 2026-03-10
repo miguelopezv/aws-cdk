@@ -14,12 +14,12 @@ export class AwsCdkWorkshopStack extends Stack {
       handler: "hello.handler",
     });
 
-    const helloWithHandler = new HitCounter(this, "HelloHitCounter", {
+    const helloWithCounter = new HitCounter(this, "HelloHitCounter", {
       downstream: hello,
     });
 
     const gateway = new LambdaRestApi(this, "Endpoint", {
-      handler: helloWithHandler.handler,
+      handler: helloWithCounter.handler,
     });
   }
 }
