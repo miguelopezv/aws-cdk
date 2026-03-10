@@ -24,8 +24,9 @@ export class AwsCdkWorkshopStack extends Stack {
     });
 
     const tv = new TableViewer(this, "ViewHitCounter", {
-      title: "Hello HIts",
+      title: "Hello Hits",
       table: helloWithCounter.table,
+      sortBy: "-hits",
     });
   }
 }
