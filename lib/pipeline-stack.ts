@@ -6,6 +6,7 @@ import {
   ShellStep,
 } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
+import { CONSTANTS } from "../utils/constants";
 
 export class WorkshopPipelineStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -14,8 +15,7 @@ export class WorkshopPipelineStack extends Stack {
     const pipeline = new CodePipeline(this, "Pipeline", {
       synth: new ShellStep("Synth", {
         input: CodePipelineSource.connection("miguelopezv/aws-cdk", "main", {
-          connectionArn:
-            "arn:aws:codeconnections:us-east-1:487704436915:connection/53bc62a5-bdf3-40cc-8d5f-66aa1a5d39f2",
+          connectionArn: CONSTANTS.CONNECTION_ARN,
         }),
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
