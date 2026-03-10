@@ -25,5 +25,8 @@ export class HitCounter extends Construct {
         HITS_TABLE_NAME: table.tableName,
       },
     });
+
+    table.grantReadWriteData(this.handler);
+    props.downstream.grantInvoke(this.handler);
   }
 }
